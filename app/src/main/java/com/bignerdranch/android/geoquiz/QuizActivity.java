@@ -47,6 +47,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(true);
+                lockButtons();
             }
         });
 
@@ -55,6 +56,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(false);
+                lockButtons();
             }
         });
 
@@ -64,6 +66,7 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 updateQuestion();
+                unlockButtons();
             }
         });
 
@@ -84,6 +87,16 @@ public class QuizActivity extends AppCompatActivity {
             messageResId = R.string.incorrect_toast;
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+    }
+
+    private void lockButtons() {
+        mTrueButton.setEnabled(false);
+        mFalseButton.setEnabled(false);
+    }
+
+    private void unlockButtons() {
+        mTrueButton.setEnabled(true);
+        mFalseButton.setEnabled(true);
     }
 
     @Override
