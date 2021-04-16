@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,13 +21,18 @@ public class CheatActivity extends AppCompatActivity {
     private boolean mAnswerIsTrue;
     private boolean mAnswerShown;
     private TextView mAnswerTextView;
+    private TextView mApiTextView;
     private Button mShowAnswerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
+
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
+
+        mApiTextView = (TextView) findViewById(R.id.api_version_text_view);
+        mApiTextView.setText("SDK version " + Build.VERSION.SDK_INT);
 
         mAnswerTextView = (TextView) findViewById(R.id.answer_text_view);
         if (savedInstanceState != null) {
@@ -35,6 +41,7 @@ public class CheatActivity extends AppCompatActivity {
                 setAnswerShownResult(true);
             }
         }
+
         mShowAnswerButton = (Button) findViewById(R.id.show_answer_button);
         mShowAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
